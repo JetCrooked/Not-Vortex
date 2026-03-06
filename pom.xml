@@ -18,29 +18,47 @@
             <url>https://jitpack.io</url>
         </repository>
         <repository>
-            <id>jcenter</id>
-            <name>jcenter-bintray</name>
-            <url>https://jcenter.bintray.com</url>
+            <id>central</id>
+            <name>bintray</name>
+            <url>http://jcenter.bintray.com</url>
+        </repository>
+        <repository>
+            <id>m2-chew</id>
+            <name>Maven Chewtral</name>
+            <url>https://m2.chew.pro/releases</url>
         </repository>
     </repositories>
     
     <dependencies>
-	<dependency>
-	    <groupId>com.github.jagrosh</groupId>
-	    <artifactId>JDA</artifactId>
-	    <version>vortex-SNAPSHOT</version>
-	</dependency>
         <dependency>
-            <groupId>com.jagrosh</groupId>
-            <artifactId>jda-utilities</artifactId>
-            <version>3.0.5</version>
-            <type>pom</type>
+            <groupId>com.github.jagrosh</groupId>
+            <artifactId>JDA</artifactId>
+            <version>vortex-e37df005f4-1</version>
         </dependency>
-	<dependency>
-            <groupId>com.jagrosh</groupId>
+
+        <dependency>
+            <groupId>com.github.jagrosh</groupId>
             <artifactId>EasySQL</artifactId>
-            <version>0.3</version>
+            <version>4909efbec8</version>
+        </dependency><dependency>
+        <groupId>com.github.JDA-Applications.JDA-Utilities</groupId>
+        <artifactId>jda-utilities-command</artifactId>
+        <version>master-dfd5c6f599-1</version>
+    </dependency>	<dependency>
+        <groupId>com.github.JDA-Applications.JDA-Utilities</groupId>
+        <artifactId>jda-utilities-commons</artifactId>
+        <version>master-dfd5c6f599-1</version>
+    </dependency>	<dependency>
+        <groupId>com.github.JDA-Applications.JDA-Utilities</groupId>
+        <artifactId>jda-utilities-examples</artifactId>
+        <version>master-dfd5c6f599-1</version>
+    </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.13.2</version>
         </dependency>
+
         <dependency>
             <groupId>club.minnced</groupId>
             <artifactId>discord-webhooks</artifactId>

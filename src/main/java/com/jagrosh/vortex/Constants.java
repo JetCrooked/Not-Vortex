@@ -27,7 +27,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 public class Constants
 {
     public final static OffsetDateTime STARTUP = OffsetDateTime.now();
-    public final static String PREFIX          = ">>";
+    public final static String PREFIX          = ">";
     public final static String SUCCESS         = Emoji.SUCCESS;
     public final static String WARNING         = Emoji.WARNING;
     public final static String ERROR           = Emoji.ERROR;

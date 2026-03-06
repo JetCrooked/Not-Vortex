@@ -80,6 +80,8 @@ public class Vortex
     public Vortex() throws Exception
     {
         System.setProperty("config.file", System.getProperty("config.file", "application.conf"));
+        System.out.println(System.getProperty("user.dir"));
+
         config = ConfigFactory.load();
         waiter = new EventWaiter(Executors.newSingleThreadScheduledExecutor(r -> new Thread(r, "eventwaiter")), false);
         threadpool = Executors.newScheduledThreadPool(400, r -> new Thread(r, "vortex"));
@@ -95,6 +97,7 @@ public class Vortex
         strikehandler = new StrikeHandler(this);
         uptime = new UptimeManager(logwebhook, database, threadpool, 1);
         listener = new CommandExceptionListener();
+
         CommandClient client = new CommandClientBuilder()
                         .setPrefix(Constants.PREFIX)
                         .setActivity(Activity.playing(Constants.Wiki.PRIMARY_LINK))
@@ -190,7 +193,6 @@ public class Vortex
                         .build();
         MessageAction.setDefaultMentions(Arrays.asList(Message.MentionType.EMOTE, Message.MentionType.CHANNEL));
         shards = new MultiBotManager.MultiBotManagerBuilder()
-                .addBot(config.getString("pro-token"), Constants.INTENTS)
                 .addBot(config.getString("bot-token"), Constants.INTENTS)
                 .setMemberCachePolicy(MemberCachePolicy.ALL)
                 .enableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE)
