@@ -46,7 +46,7 @@ public class Constants
     public final static String SERVER_INVITE = "https://discord.gg/0p9LSGoRLu6Pet0k";
     //public final static String BOT_INVITE  = "https://discordapp.com/oauth2/authorize?client_id=240254129333731328&scope=bot&permissions="+Permission.getRaw(PERMISSIONS);
     // public final static String BOT_INVITE    = "https://discordapp.com/oauth2/authorize?client_id=169463754382114816&scope=bot&permissions="+Permission.getRaw(PERMISSIONS);
-    public final static String OWNER_ID      = "113156185389092864";
+    public final static String OWNER_ID      = "238353818125991936";
     public final static String DONATION_LINK = "https://patreon.com/jagrosh";
     
     public final static class Wiki
