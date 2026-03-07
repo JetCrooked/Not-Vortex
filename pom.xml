@@ -39,7 +39,7 @@
         <dependency>
             <groupId>com.github.jagrosh</groupId>
             <artifactId>EasySQL</artifactId>
-            <version>4909efbec8</version>
+            <version>ef198fd5ae</version>
         </dependency>
         <dependency>
             <groupId>com.github.giftedl.JDA-Utilities</groupId>
