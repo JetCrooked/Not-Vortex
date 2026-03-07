@@ -19,6 +19,7 @@ import com.jagrosh.vortex.logging.MessageCache.CachedMessage;
 import java.util.List;
 import java.util.stream.Collectors;
 import net.dv8tion.jda.api.JDA.ShardInfo;
+import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Role;
@@ -82,14 +83,20 @@ public class Listener implements EventListener
         else if (event instanceof MessageUpdateEvent)
         {
             Message m = ((MessageUpdateEvent)event).getMessage();
+
+            System.out.println("edit" + m);
             
             if(!m.getAuthor().isBot()) // ignore bot edits
             {
+                System.out.println("automod");
                 // Run automod on the message
-                vortex.getAutoMod().performAutomod(m);
+                if (m.getChannelType() == ChannelType.TEXT)
+                    vortex.getAutoMod().performAutomod(m);
+                System.out.println("dautomod");
                 
                 // Store and log the edit
                 CachedMessage old = vortex.getMessageCache().putMessage(m);
+                System.out.println("edita" + old);
                 vortex.getBasicLogger().logMessageEdit(m, old);
             }
         }

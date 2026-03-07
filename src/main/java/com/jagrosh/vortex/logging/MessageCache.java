@@ -109,14 +109,14 @@ public class MessageCache
             return author;
         }
         
-        public TextChannel getTextChannel(MultiBotManager botManager)
+        public GuildChannel getTextChannel(MultiBotManager botManager)
         {
             if (guild == 0L)
                 return null;
             Guild g = botManager.getGuildById(guild);
             if (g == null)
                 return null;
-            return g.getTextChannelById(channel);
+            return g.getGuildChannelById(channel);
         }
         
         public TextChannel getTextChannel(ShardManager shardManager)

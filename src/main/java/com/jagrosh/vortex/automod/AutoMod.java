@@ -266,9 +266,19 @@ public class AutoMod
             return;
 
         // check the channel for channel-specific settings
-        String topic = message.getTextChannel().getTopic();
-        boolean preventSpam = topic==null || !topic.toLowerCase().contains("{spam}");
-        boolean preventInvites = topic==null || !topic.toLowerCase().contains("{invites}");
+        Channel channel = message.getChannel();
+
+        boolean preventSpam = false;
+        boolean preventInvites;
+
+        if (channel.getType() == ChannelType.TEXT) {
+            String topic = ((TextChannel)channel).getTopic();
+
+            preventSpam = topic == null || !topic.toLowerCase().contains("{spam}");
+            preventInvites = topic == null || !topic.toLowerCase().contains("{invites}");
+        } else {
+            preventInvites = false;
+        }
 
         // get additional settings and data from the database
         List<Long> inviteWhitelist = !preventInvites ? Collections.emptyList()
@@ -304,7 +314,7 @@ public class AutoMod
         }
         
         // send a short 'warning' message that self-deletes
-        if(currentStatus.channelWarning != null && message.getGuild().getSelfMember().hasPermission(message.getTextChannel(), Permission.MESSAGE_SEND))
+        if(currentStatus.channelWarning != null && message.getGuild().getSelfMember().hasPermission((GuildChannel) message.getChannel(), Permission.MESSAGE_SEND))
         {
             message.getChannel().sendMessage(message.getAuthor().getAsMention() + Constants.WARNING + " " + currentStatus.channelWarning)
                     .queue(m -> m.delete().queueAfter(2500, TimeUnit.MILLISECONDS, s->{}, f->{}), f->{});
@@ -462,7 +472,7 @@ public class AutoMod
     
     private void runAntiEveryone(AutomodSettings settings, AutomodStatus currentStatus, Message message)
     {
-        if(settings.everyoneStrikes <= 0 || message.getMember().hasPermission(message.getTextChannel(), Permission.MESSAGE_MENTION_EVERYONE))
+        if(settings.everyoneStrikes <= 0 || message.getMember().hasPermission((GuildChannel) message.getChannel(), Permission.MESSAGE_MENTION_EVERYONE))
             return;
         String filtered = message.getContentRaw().replace("`@everyone`", "").replace("`@here`", "");
         if(filtered.contains("@everyone") || filtered.contains("@here")

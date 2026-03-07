@@ -24,11 +24,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.User;
+
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.sharding.ShardManager;
 
 /**
@@ -128,7 +125,7 @@ public class LogUtil
     
     public static String logCachedMessagesForwards(String title, List<CachedMessage> messages, MultiBotManager botManager)
     {
-        TextChannel deltc = messages.get(0).getTextChannel(botManager);
+        GuildChannel deltc = messages.get(0).getTextChannel(botManager);
         Guild delg = deltc.getGuild();
         StringBuilder sb = new StringBuilder("-- "+title+" -- #"+deltc.getName()+" ("+deltc.getId()+") -- "+delg.getName()+" ("+delg.getId()+") --");
         for(int i=0; i<messages.size(); i++)

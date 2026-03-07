@@ -105,10 +105,12 @@ public class BasicLogger
     
     public void logMessageEdit(Message newMessage, CachedMessage oldMessage)
     {
+        System.out.println("buh " + oldMessage);
         if(oldMessage==null)
             return;
-        TextChannel mtc = oldMessage.getTextChannel(vortex.getShardManager());
-        PermissionOverride po = mtc.getPermissionOverride(mtc.getGuild().getSelfMember());
+        GuildChannel mtc = oldMessage.getTextChannel(vortex.getShardManager());
+        PermissionOverride po = mtc.getPermissionContainer().getPermissionOverride(mtc.getGuild().getSelfMember());
+
         if(po!=null && po.getDenied().contains(Permission.MESSAGE_HISTORY))
             return;
         TextChannel tc = vortex.getDatabase().settings.getSettings(newMessage.getGuild()).getMessageLogChannel(newMessage.getGuild());
@@ -116,6 +118,7 @@ public class BasicLogger
             return;
         if(newMessage.getContentRaw().equals(oldMessage.getContentRaw()))
             return;
+        System.out.println("buh " + oldMessage);
         EmbedBuilder edit = new EmbedBuilder()
                 .setColor(Color.YELLOW)
                 .appendDescription("**From:** ")
@@ -125,8 +128,10 @@ public class BasicLogger
             edit.addField("To:", newm.length()>1024 ? newm.substring(0,1016)+" (...)" : newm, false);
         else
             edit.appendDescription("\n**To:** "+newm);
+        System.out.println("buh " + oldMessage);
         log(newMessage.getTimeEdited()==null ? newMessage.getTimeCreated(): newMessage.getTimeEdited(), tc, EDIT, 
-                FormatUtil.formatFullUser(newMessage.getAuthor())+" edited a message in "+newMessage.getTextChannel().getAsMention()+":", edit.build());
+                FormatUtil.formatFullUser(newMessage.getAuthor())+" edited a message in "+newMessage.getChannel().getAsMention()+":", edit.build());
+        System.out.println("buh " + oldMessage);
     }
     
     public void logMessageDelete(CachedMessage oldMessage)
@@ -136,8 +141,8 @@ public class BasicLogger
         Guild guild = oldMessage.getGuild(vortex.getShardManager());
         if(guild==null)
             return;
-        TextChannel mtc = oldMessage.getTextChannel(vortex.getShardManager());
-        PermissionOverride po = mtc.getPermissionOverride(guild.getSelfMember());
+        GuildChannel mtc = oldMessage.getTextChannel(vortex.getShardManager());
+        PermissionOverride po = mtc.getPermissionContainer().getPermissionOverride(guild.getSelfMember());
         if(po!=null && po.getDenied().contains(Permission.MESSAGE_HISTORY))
             return;
         TextChannel tc = vortex.getDatabase().settings.getSettings(guild).getMessageLogChannel(guild);
@@ -166,8 +171,8 @@ public class BasicLogger
             //log(OffsetDateTime.now(), tc, "\uD83D\uDEAE", "**"+count+"** messages were deleted from "+text.getAsMention()+" (**"+messages.size()+"** logged)", null);
             return;
         }
-        TextChannel mtc = messages.get(0).getTextChannel(vortex.getShardManager());
-        PermissionOverride po = mtc.getPermissionOverride(mtc.getGuild().getSelfMember());
+        GuildChannel mtc = messages.get(0).getTextChannel(vortex.getShardManager());
+        PermissionOverride po = mtc.getPermissionContainer().getPermissionOverride(mtc.getGuild().getSelfMember());
         if(po!=null && po.getDenied().contains(Permission.MESSAGE_HISTORY))
             return;
         if(messages.size()==1)
