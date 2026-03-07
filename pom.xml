@@ -33,26 +33,29 @@
         <dependency>
             <groupId>com.github.jagrosh</groupId>
             <artifactId>JDA</artifactId>
-            <version>vortex-e37df005f4-1</version>
+            <version>v5.0.0-alpha.5</version>
         </dependency>
 
         <dependency>
             <groupId>com.github.jagrosh</groupId>
             <artifactId>EasySQL</artifactId>
             <version>4909efbec8</version>
-        </dependency><dependency>
-        <groupId>com.github.JDA-Applications.JDA-Utilities</groupId>
-        <artifactId>jda-utilities-command</artifactId>
-        <version>master-dfd5c6f599-1</version>
-    </dependency>	<dependency>
-        <groupId>com.github.JDA-Applications.JDA-Utilities</groupId>
-        <artifactId>jda-utilities-commons</artifactId>
-        <version>master-dfd5c6f599-1</version>
-    </dependency>	<dependency>
-        <groupId>com.github.JDA-Applications.JDA-Utilities</groupId>
-        <artifactId>jda-utilities-examples</artifactId>
-        <version>master-dfd5c6f599-1</version>
-    </dependency>
+        </dependency>
+        <dependency>
+            <groupId>com.github.giftedl.JDA-Utilities</groupId>
+            <artifactId>jda-utilities-command</artifactId>
+            <version>c8fc1b5d7c</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.giftedl.JDA-Utilities</groupId>
+            <artifactId>jda-utilities-commons</artifactId>
+            <version>c8fc1b5d7c</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.giftedl.JDA-Utilities</groupId>
+            <artifactId>jda-utilities-examples</artifactId>
+            <version>c8fc1b5d7c</version>
+        </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>

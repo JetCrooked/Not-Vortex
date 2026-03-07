@@ -16,6 +16,7 @@
 package com.jagrosh.vortex.commands.moderation;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import com.jagrosh.jdautilities.commons.utils.FinderUtil;
@@ -46,12 +47,12 @@ public class VoicemoveCmd extends ModCommand
     @Override
     protected void execute(CommandEvent event)
     {
-        if(event.getGuild().getSelfMember().getVoiceState().inVoiceChannel())
+        if(Objects.requireNonNull(event.getGuild().getSelfMember().getVoiceState()).inAudioChannel())
         {
             event.replyWarning("I am already in a voice channel; move me to drag all users.");
             return;
         }
-        if(event.getArgs().isEmpty() && !event.getMember().getVoiceState().inVoiceChannel())
+        if(event.getArgs().isEmpty() && !Objects.requireNonNull(event.getMember().getVoiceState()).inAudioChannel())
         {
             event.replyError("You must be in or specify a voice channel to move users from!");
             return;
@@ -74,7 +75,7 @@ public class VoicemoveCmd extends ModCommand
         }
         else
         {
-            vc = event.getMember().getVoiceState().getChannel();
+            vc = (VoiceChannel) event.getMember().getVoiceState().getChannel();
         }
         if(!event.getMember().hasPermission(Permission.VOICE_MOVE_OTHERS))
         {

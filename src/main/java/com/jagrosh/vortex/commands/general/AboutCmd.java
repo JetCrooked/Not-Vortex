@@ -26,6 +26,8 @@ import net.dv8tion.jda.api.JDAInfo;
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.ChannelType;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.sharding.ShardManager;
 
 /**
@@ -45,10 +47,11 @@ public class AboutCmd extends Command
     @Override
     protected void execute(CommandEvent event)
     {
+        System.out.println("ran");
         ShardManager sm = event.getJDA().getShardManager();
         event.reply(new MessageBuilder()
                 .setContent(Constants.VORTEX_EMOJI + " **All about Vortex** " + Constants.VORTEX_EMOJI)
-                .setEmbed(new EmbedBuilder()
+                .setEmbeds(new EmbedBuilder()
                         .setColor(!event.isFromType(ChannelType.TEXT) ? Color.GRAY : event.getSelfMember().getColor())
                         .setDescription("Hello, I am **Vortex**#8540, a bot designed to keep your server safe and make moderating fast and easy!\n"
                                 + "I was written in Java by **jagrosh**#4824 using [JDA](" + JDAInfo.GITHUB + ") and [JDA-Utilities](" + JDAUtilitiesInfo.GITHUB + ")\n"
@@ -60,6 +63,11 @@ public class AboutCmd extends Command
                         .setFooter("Last restart", null)
                         .setTimestamp(event.getClient().getStartTime())
                         .build())
-                .build());
+                .setActionRows(
+                        ActionRow.of(
+                                Button.link(event.getClient().getServerInvite(), "Server Invite"),
+                                Button.link(Constants.Wiki.COMMANDS, "Commands Wiki"),
+                                Button.link(Constants.DONATION_LINK, "Donations")
+                        )).build());
     }
 }

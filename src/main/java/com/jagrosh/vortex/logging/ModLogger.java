@@ -162,7 +162,7 @@ public class ModLogger
             try
             {
                 modlog.sendMessage(new MessageBuilder()
-                        .setEmbed(embed)
+                        .setEmbeds(embed)
                         .append(FormatUtil.filterEveryone(LogUtil.modlogCleanFormat(now, 
                                 vortex.getDatabase().settings.getSettings(moderator.getGuild()).getTimezone(), 
                                 i, moderator.getUser(), numMessages, target, criteria, reason)))

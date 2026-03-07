@@ -150,7 +150,6 @@ public class OtherUtil
             case TEAM_USER:            return "\u2753";
             case UNKNOWN:              return "\u2753";
             case VERIFIED_BOT:         return Emoji.BOT_VERIFIED;
-            case SYSTEM:               return Emoji.BOT_SYSTEM;
             default:                   return "\u2753";
         }
     }

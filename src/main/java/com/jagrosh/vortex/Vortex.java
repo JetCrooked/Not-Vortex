@@ -182,7 +182,7 @@ public class Vortex
                         )
                         .setHelpConsumer(event -> event.replyInDm(FormatUtil.formatHelp(event, this), m -> 
                         {
-                            if(event.isFromType(ChannelType.TEXT))
+                            if(!event.isFromType(ChannelType.PRIVATE))
                                 try
                                 {
                                     event.getMessage().addReaction(Constants.HELP_REACTION).queue(s->{}, f->{});
@@ -206,7 +206,6 @@ public class Vortex
         uptime.start();
         
         threadpool.scheduleWithFixedDelay(() -> cleanPremium(), 0, 2, TimeUnit.HOURS);
-        threadpool.scheduleWithFixedDelay(() -> leavePointlessGuilds(), 5, 30, TimeUnit.MINUTES);
         threadpool.scheduleWithFixedDelay(() -> database.tempbans.checkUnbans(shards), 0, 2, TimeUnit.MINUTES);
         threadpool.scheduleWithFixedDelay(() -> database.tempmutes.checkUnmutes(shards, database.settings), 0, 45, TimeUnit.SECONDS);
         threadpool.scheduleWithFixedDelay(() -> database.tempslowmodes.checkSlowmode(shards), 0, 45, TimeUnit.SECONDS);
@@ -298,37 +297,38 @@ public class Vortex
             }
         });
     }
-    
-    public void leavePointlessGuilds()
-    {
-        //shards.getGuilds().stream().filter(g ->
-        shards.getShardManagers().stream().flatMap(s -> s.getGuilds().stream()).filter(g -> 
-        {
-            if(!g.isLoaded())
-                return false;
-            if(Constants.OWNER_ID.equals(g.getOwnerId()))
-                return false;
-            int botcount = (int) g.getMemberCache().stream().filter(m -> m.getUser().isBot()).count();
-            int totalcount = (int) g.getMemberCache().size();
-            int humancount = totalcount - botcount;
-            if(humancount < 30 || botcount > humancount)
-            {
-                if(database.settings.hasSettings(g))
-                    return false;
-                if(database.automod.hasSettings(g))
-                    return false;
-                return true;
-            }
-            return false;
-        }).forEach(g -> 
-        {
-            OtherUtil.safeDM(g.getOwner()==null ? null : g.getOwner().getUser(), Constants.ERROR + " Sorry, your server **" 
-                    + g.getName() + "** does not meet the minimum requirements for using Vortex. You can find the requirements "
-                    + "here: <" + Constants.Wiki.START + ">. \n\n" + Constants.WARNING + "You may want to consider using a "
-                    + "different bot that is designed for servers like yours. You can find a public list of bots here: "
-                    + "<https://discord.bots.gg>.", true, () -> g.leave().queue());
-        });
-    }
+
+  // Fuck off
+//    public void leavePointlessGuilds()
+//    {
+//        //shards.getGuilds().stream().filter(g ->
+//        shards.getShardManagers().stream().flatMap(s -> s.getGuilds().stream()).filter(g ->
+//        {
+//            if(!g.isLoaded())
+//                return false;
+//            if(Constants.OWNER_ID.equals(g.getOwnerId()))
+//                return false;
+//            int botcount = (int) g.getMemberCache().stream().filter(m -> m.getUser().isBot()).count();
+//            int totalcount = (int) g.getMemberCache().size();
+//            int humancount = totalcount - botcount;
+//            if(humancount < 30 || botcount > humancount)
+//            {
+//                if(database.settings.hasSettings(g))
+//                    return false;
+//                if(database.automod.hasSettings(g))
+//                    return false;
+//                return true;
+//            }
+//            return false;
+//        }).forEach(g ->
+//        {
+//            OtherUtil.safeDM(g.getOwner()==null ? null : g.getOwner().getUser(), Constants.ERROR + " Sorry, your server **"
+//                    + g.getName() + "** does not meet the minimum requirements for using Vortex. You can find the requirements "
+//                    + "here: <" + Constants.Wiki.START + ">. \n\n" + Constants.WARNING + "You may want to consider using a "
+//                    + "different bot that is designed for servers like yours. You can find a public list of bots here: "
+//                    + "<https://discord.bots.gg>.", true, () -> g.leave().queue());
+//        });
+//    }
     
     
     /**

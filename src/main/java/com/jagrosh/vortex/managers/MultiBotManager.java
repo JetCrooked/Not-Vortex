@@ -45,7 +45,6 @@ public class MultiBotManager
         for(DefaultShardManagerBuilder b: builders)
         {
             b.setEventManagerProvider(i -> new MultiBotEventManager());
-            b.setBulkDeleteSplittingEnabled(false);
             b.setRequestTimeoutRetry(true);
             b.setSessionController(new SlowerConcurrentSessionController(20));
             bots.add(b.build());

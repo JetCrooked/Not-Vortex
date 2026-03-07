@@ -34,6 +34,7 @@ public abstract class ConditionalEventManager extends InterfacedEventManager
     @Override
     public void handle(GenericEvent ge)
     {
+        System.out.println("handling!!" + ge);
         // check if this guild is already loaded by some other shard
         long selfId;
         try

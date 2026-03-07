@@ -63,7 +63,6 @@ public class CommandExceptionListener implements CommandListener
     @Override
     public void onCommand(CommandEvent event, Command command)
     {
-        if(event.isFromType(ChannelType.TEXT))
             usage.increment(event.getGuild().getIdLong());
     }
     

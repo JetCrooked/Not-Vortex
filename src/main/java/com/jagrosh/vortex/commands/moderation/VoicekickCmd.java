@@ -66,7 +66,7 @@ public class VoicekickCmd extends ModCommand
                 builder.append("\n").append(event.getClient().getError()).append(" You do not have permission to voicekick ").append(FormatUtil.formatUser(m.getUser()));
             else if(!event.getSelfMember().canInteract(m))
                 builder.append("\n").append(event.getClient().getError()).append(" I am unable to voicekick ").append(FormatUtil.formatUser(m.getUser()));
-            else if(!m.getVoiceState().inVoiceChannel())
+            else if(!m.getVoiceState().inAudioChannel())
                 builder.append("\n").append(event.getClient().getWarning()).append(" ").append(FormatUtil.formatUser(m.getUser())).append(" is not in a voice channel!");
             else if(modrole!=null && m.getRoles().contains(modrole))
                 builder.append("\n").append(event.getClient().getError()).append(" I won't voicekick ").append(FormatUtil.formatUser(m.getUser())).append(" because they have the Moderator Role");

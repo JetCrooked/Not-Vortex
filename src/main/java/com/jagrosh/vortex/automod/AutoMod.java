@@ -304,7 +304,7 @@ public class AutoMod
         }
         
         // send a short 'warning' message that self-deletes
-        if(currentStatus.channelWarning != null && message.getGuild().getSelfMember().hasPermission(message.getTextChannel(), Permission.MESSAGE_WRITE)) 
+        if(currentStatus.channelWarning != null && message.getGuild().getSelfMember().hasPermission(message.getTextChannel(), Permission.MESSAGE_SEND))
         {
             message.getChannel().sendMessage(message.getAuthor().getAsMention() + Constants.WARNING + " " + currentStatus.channelWarning)
                     .queue(m -> m.delete().queueAfter(2500, TimeUnit.MILLISECONDS, s->{}, f->{}), f->{});

@@ -24,7 +24,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.events.ReadyEvent;
-import net.dv8tion.jda.api.events.channel.text.update.TextChannelUpdateSlowmodeEvent;
+import net.dv8tion.jda.api.events.channel.update.ChannelUpdateSlowmodeEvent;
 import net.dv8tion.jda.api.events.guild.GuildBanEvent;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.guild.GuildUnbanEvent;
@@ -35,9 +35,9 @@ import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceMoveEvent;
 import net.dv8tion.jda.api.events.message.MessageBulkDeleteEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageUpdateEvent;
+import net.dv8tion.jda.api.events.message.MessageDeleteEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageUpdateEvent;
 import net.dv8tion.jda.api.events.user.update.UserUpdateAvatarEvent;
 import net.dv8tion.jda.api.events.user.update.UserUpdateDiscriminatorEvent;
 import net.dv8tion.jda.api.events.user.update.UserUpdateNameEvent;
@@ -64,9 +64,11 @@ public class Listener implements EventListener
     @Override
     public void onEvent(GenericEvent event)
     {
-        if (event instanceof GuildMessageReceivedEvent)
+        if (event instanceof MessageReceivedEvent)
         {
-            Message m = ((GuildMessageReceivedEvent)event).getMessage();
+            Message m = ((MessageReceivedEvent)event).getMessage();
+
+            System.out.print(m);
             
             if(!m.getAuthor().isBot()) // ignore bot messages
             {
@@ -77,9 +79,9 @@ public class Listener implements EventListener
                 vortex.getAutoMod().performAutomod(m);
             }
         }
-        else if (event instanceof GuildMessageUpdateEvent)
+        else if (event instanceof MessageUpdateEvent)
         {
-            Message m = ((GuildMessageUpdateEvent)event).getMessage();
+            Message m = ((MessageUpdateEvent)event).getMessage();
             
             if(!m.getAuthor().isBot()) // ignore bot edits
             {
@@ -91,9 +93,9 @@ public class Listener implements EventListener
                 vortex.getBasicLogger().logMessageEdit(m, old);
             }
         }
-        else if (event instanceof GuildMessageDeleteEvent)
+        else if (event instanceof MessageDeleteEvent)
         {
-            GuildMessageDeleteEvent gevent = (GuildMessageDeleteEvent) event;
+            MessageDeleteEvent gevent = (MessageDeleteEvent) event;
             
             // Log the deletion
             CachedMessage old = vortex.getMessageCache().pullMessage(gevent.getGuild(), gevent.getMessageIdLong());
@@ -219,9 +221,9 @@ public class Listener implements EventListener
             if(!gevent.getMember().getUser().isBot()) // ignore bots
                 vortex.getBasicLogger().logVoiceLeave(gevent);
         }
-        else if (event instanceof TextChannelUpdateSlowmodeEvent)
+        else if (event instanceof ChannelUpdateSlowmodeEvent)
         {
-            vortex.getDatabase().tempslowmodes.clearSlowmode(((TextChannelUpdateSlowmodeEvent) event).getChannel());
+            vortex.getDatabase().tempslowmodes.clearSlowmode(((ChannelUpdateSlowmodeEvent) event).getChannel());
         }
         else if (event instanceof GuildMemberUpdateTimeOutEvent)
         {

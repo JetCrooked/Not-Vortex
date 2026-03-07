@@ -30,7 +30,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
  */
 public abstract class LogCommand extends Command
 {
-    public static Permission[] REQUIRED_PERMS = {Permission.MESSAGE_READ, Permission.MESSAGE_WRITE, Permission.MESSAGE_EMBED_LINKS, Permission.MESSAGE_HISTORY};
+    public static Permission[] REQUIRED_PERMS = {Permission.MESSAGE_SEND, Permission.VIEW_CHANNEL, Permission.MESSAGE_EMBED_LINKS, Permission.MESSAGE_HISTORY};
     public static String REQUIRED_ERROR = "I am missing the necessary permissions (Read Messages, Send Messages, Read Message History, and Embed Links) in %s!";
     protected final Vortex vortex;
     

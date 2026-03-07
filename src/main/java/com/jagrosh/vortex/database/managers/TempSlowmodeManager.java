@@ -24,6 +24,7 @@ import com.jagrosh.vortex.managers.MultiBotManager;
 import com.jagrosh.vortex.utils.Pair;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Channel;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import org.json.JSONObject;
@@ -83,7 +84,7 @@ public class TempSlowmodeManager extends DataManager
         });
     }
     
-    public void clearSlowmode(TextChannel channel)
+    public void clearSlowmode(Channel channel)
     {
         readWrite(selectAll(CHANNEL_ID.is(channel.getId())), rs ->
         {

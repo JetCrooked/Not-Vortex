@@ -84,7 +84,7 @@ public class BasicLogger
             usage.increment(tc.getGuild().getIdLong());
             tc.sendMessage(new MessageBuilder()
                 .append(FormatUtil.filterEveryone(LogUtil.basiclogFormat(now, vortex.getDatabase().settings.getSettings(tc.getGuild()).getTimezone(), emote, message)))
-                .setEmbed(embed)
+                .setEmbeds(embed)
                 .build()).queue();
         }
         catch(PermissionException ignore) {}
@@ -154,7 +154,7 @@ public class BasicLogger
         log(OffsetDateTime.now(), tc, DELETE, user+"'s message has been deleted from "+mtc.getAsMention()+":", delete.build());
     }
     
-    public void logMessageBulkDelete(List<CachedMessage> messages, int count, TextChannel text)
+    public void logMessageBulkDelete(List<CachedMessage> messages, int count, GuildChannel text)
     {
         if(count==0)
             return;

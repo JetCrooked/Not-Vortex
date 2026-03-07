@@ -124,7 +124,7 @@ public class UserinfoCmd extends Command
         
         event.reply(new MessageBuilder()
                 .append(FormatUtil.filterEveryone(title))
-                .setEmbed(new EmbedBuilder()
+                .setEmbeds(new EmbedBuilder()
                         .setDescription(str.toString())
                         .setThumbnail(user.getEffectiveAvatarUrl())
                         .setColor(member.getColor()).build())
@@ -159,7 +159,6 @@ public class UserinfoCmd extends Command
             case WATCHING: 
                 str="Watching"; 
                 break;
-            case DEFAULT:
             default:
                 str="Playing"; 
                 break;
