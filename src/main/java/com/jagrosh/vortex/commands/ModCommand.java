@@ -36,7 +36,7 @@ public abstract class ModCommand extends Command
         this.guildOnly = true;
         this.category = new Category("Moderation", event -> 
         {
-            if(event.getChannelType() != ChannelType.TEXT)
+            if(event.getChannelType() == ChannelType.PRIVATE)
             {
                 event.replyError("This command is not available in Direct Messages!");
                 return false;

@@ -22,10 +22,10 @@ package com.jagrosh.vortex;
 public class Emoji
 {
     // vortex general icons
-    public final static String VORTEX   = "<:vortex:850113634859483176>";
-    public final static String SUCCESS  = "<:vSuccess:850102850491121725>";
-    public final static String WARNING  = "<:vWarning:850102850855895110>";
-    public final static String ERROR    = "<:vError:850102850846457879>";
+    public final static String VORTEX   = ":robot:";
+    public final static String SUCCESS  = "☑\uFE0F";
+    public final static String WARNING  = ":warning:";
+    public final static String ERROR    = ":x:";
     public final static String LOADING  = "<a:typing:850124618932944937>";
     
     // bot
