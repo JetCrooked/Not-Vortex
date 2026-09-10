@@ -24,6 +24,8 @@ import com.jagrosh.vortex.commands.moderation.*;
 import com.jagrosh.vortex.commands.tools.*;
 import com.jagrosh.vortex.commands.owner.*;
 import com.jagrosh.vortex.commands.settings.*;
+
+import java.util.Objects;
 import java.util.concurrent.Executors;
 import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
@@ -99,7 +101,7 @@ public class Vortex
         listener = new CommandExceptionListener();
 
         CommandClient client = new CommandClientBuilder()
-                        .setPrefix(Constants.PREFIX)
+                        .setPrefix(Objects.requireNonNullElse(config.getString("prefix"), Constants.PREFIX))
                         .setActivity(Activity.playing(Constants.Wiki.PRIMARY_LINK))
                         .setOwnerId(Constants.OWNER_ID)
                         .setServerInvite(Constants.SERVER_INVITE)
