@@ -62,8 +62,8 @@ public class PrefixCmd extends Command
             return;
         }
         
-        vortex.getDatabase().settings.setPrefix(event.getGuild(), event.getArgs());
-        event.replySuccess("The server prefix has been set to `"+event.getArgs()+"`\n"
-                + "Note that the default prefix (`"+event.getClient().getPrefix()+"`) cannot be removed and will work in addition to the custom prefix.");
+//        vortex.getDatabase().settings.setPrefix(event.getGuild(), event.getArgs());
+        vortex.getDatabase().settings.setPrefix(event.getGuild(), null);
+        event.replySuccess("Due to Discord intent requirements, you cannot set a custom prefix besides the bots mention anymore.");
     }
 }
