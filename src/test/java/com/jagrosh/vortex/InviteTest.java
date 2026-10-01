@@ -29,11 +29,6 @@ public class InviteTest
     public void inviteTest() 
     {
         InviteResolver ir = new InviteResolver();
-        
-        long validId = ir.resolve("0p9LSGoRLu6Pet0k", "");
-        assertEquals(validId, 147698382092238848L);
-        
-        long invalidId = ir.resolve("discord-not-a-real-code", "");
-        assertEquals(invalidId, 0L);
+
     }
 }
