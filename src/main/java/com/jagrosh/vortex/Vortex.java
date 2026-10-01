@@ -101,7 +101,7 @@ public class Vortex
         listener = new CommandExceptionListener();
 
         CommandClient client = new CommandClientBuilder()
-                        .setPrefix(Objects.requireNonNullElse(config.getString("prefix"), Constants.PREFIX))
+                        .setPrefix(null)
                         .setActivity(Activity.playing(Constants.Wiki.PRIMARY_LINK))
                         .setOwnerId(Constants.OWNER_ID)
                         .setServerInvite(Constants.SERVER_INVITE)
