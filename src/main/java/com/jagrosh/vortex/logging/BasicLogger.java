@@ -26,6 +26,7 @@ import java.awt.Color;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -41,6 +42,7 @@ import net.dv8tion.jda.api.events.user.update.UserUpdateAvatarEvent;
 import net.dv8tion.jda.api.events.user.update.UserUpdateDiscriminatorEvent;
 import net.dv8tion.jda.api.events.user.update.UserUpdateNameEvent;
 import net.dv8tion.jda.api.exceptions.PermissionException;
+import org.jetbrains.annotations.Nullable;
 
 /**
  *
@@ -77,14 +79,18 @@ public class BasicLogger
         return usage;
     }
     
-    private void log(OffsetDateTime now, TextChannel tc, String emote, String message, MessageEmbed embed)
+    private void log(OffsetDateTime now, TextChannel tc, String emote, String message, @Nullable MessageEmbed embed)
     {
         try
         {
             usage.increment(tc.getGuild().getIdLong());
             tc.sendMessage(new MessageBuilder()
-                .append(FormatUtil.filterEveryone(LogUtil.basiclogFormat(now, vortex.getDatabase().settings.getSettings(tc.getGuild()).getTimezone(), emote, message)))
-                .setEmbeds(embed)
+                .append(FormatUtil.filterEveryone(LogUtil.basiclogFormat(null, null, emote, message)))
+                .setEmbeds(embed == null ? new ArrayList<>() : new ArrayList<>() {
+                    {
+                        add(embed);
+                    }
+                } )
                 .build()).queue();
         }
         catch(PermissionException ignore) {}
